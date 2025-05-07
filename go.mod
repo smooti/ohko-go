@@ -9,13 +9,12 @@ require (
 )
 
 require (
-	github.com/digitalocean/go-smbios v0.0.0-20180907143718-390a4f403a8e
 	github.com/elastic/go-windows v1.0.2 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
-	github.com/yusufpapurcu/wmi v1.2.4 // indirect
+	github.com/yusufpapurcu/wmi v1.2.4
 	golang.org/x/sys v0.25.0 // indirect
 	howett.net/plist v0.0.0-20181124034731-591f970eefbb // indirect
 )

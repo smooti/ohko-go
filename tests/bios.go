@@ -2,27 +2,39 @@ package main
 
 import (
 	"fmt"
-	"log"
 
-	"github.com/digitalocean/go-smbios/smbios"
+	"github.com/yusufpapurcu/wmi"
 )
 
+// Define a struct that matches the Win32_OperatingSystem WMI class
+// NOTE: The field name must match the WMI property name
+type Win32_OperatingSystem struct {
+	SerialNumber string
+}
+
 func main() {
-	rc, _, err := smbios.Stream()
-	if err != nil {
-		log.Fatalf("error getting SMBIOS stream: %v", err)
-	}
-	defer rc.Close()
 
-	decoder := smbios.NewDecoder(rc)
-	// fmt.Println(decoder)
-	entries, err := decoder.Decode()
-	fmt.Println(entries)
+	fmt.Println(getWindowsSerialNumber())
+
+}
+
+func getWindowsSerialNumber() string {
+	// Return the serial number using WMI
+	var (
+		biosInfo []Win32_OperatingSystem
+		query    = "SELECT SerialNumber FROM Win32_OperatingSystem"
+	)
+
+	// Query BIOS information
+	err := wmi.Query(query, &biosInfo)
 	if err != nil {
-		log.Fatalf("error decoding SMBIOS structures: %v", err)
+		fmt.Printf("WMI Query failed: %v", err)
 	}
 
-	for i, entry := range entries {
-		fmt.Printf("Entry %d: | Header type: %d | Strings: %s\n", i, entry.Header.Type, entry.Strings)
+	// Check if biosInfo was retrieved
+	if len(biosInfo) > 0 {
+		return biosInfo[0].SerialNumber
+	} else {
+		return "No BIOS info found."
 	}
 }
