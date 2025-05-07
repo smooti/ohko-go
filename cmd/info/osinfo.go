@@ -1,4 +1,4 @@
-package cmd
+package info
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 
 var osInfoCmd = &cobra.Command{
 	Use:   "osinfo",
-	Short: "A brief description of your application",
+	Short: "Get OS information",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		GetOSInfo()
@@ -18,7 +18,7 @@ var osInfoCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(osInfoCmd)
+	InfoCmd.AddCommand(osInfoCmd)
 }
 
 func GetOSInfo() error {

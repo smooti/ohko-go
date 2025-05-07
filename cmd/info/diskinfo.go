@@ -1,4 +1,4 @@
-package cmd
+package info
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 
 var diskInfoCmd = &cobra.Command{
 	Use:   "diskinfo",
-	Short: "A brief description of your application",
+	Short: "Get disk information",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		GetDiskInfo()
@@ -19,7 +19,7 @@ var diskInfoCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(diskInfoCmd)
+	InfoCmd.AddCommand(diskInfoCmd)
 }
 
 func GetDiskInfo(drive ...string) error {
